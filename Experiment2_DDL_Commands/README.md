@@ -1,228 +1,236 @@
-# Experiment 2: DDL Commands
+Experiment 2: DDL Commands
+AIM
 
-## AIM
 To study and implement DDL commands and different types of constraints.
+THEORY
+1. CREATE
 
-## THEORY
-
-### 1. CREATE
 Used to create a new relation (table).
 
-**Syntax:**
-```sql
+Syntax:
+
 CREATE TABLE (
   field_1 data_type(size),
   field_2 data_type(size),
   ...
 );
-```
-### 2. ALTER
-Used to add, modify, drop, or rename fields in an existing relation.
-(a) ADD
-```sql
+
+2. ALTER
+
+Used to add, modify, drop, or rename fields in an existing relation. (a) ADD
+
 ALTER TABLE std ADD (Address CHAR(10));
-```
+
 (b) MODIFY
-```sql
+
 ALTER TABLE relation_name MODIFY (field_1 new_data_type(size));
-```
+
 (c) DROP
-```sql
+
 ALTER TABLE relation_name DROP COLUMN field_name;
-```
+
 (d) RENAME
-```sql
+
 ALTER TABLE relation_name RENAME COLUMN old_field_name TO new_field_name;
-```
-### 3. DROP TABLE
+
+3. DROP TABLE
+
 Used to permanently delete the structure and data of a table.
-```sql
+
 DROP TABLE relation_name;
-```
-### 4. RENAME
+
+4. RENAME
+
 Used to rename an existing database object.
-```sql
+
 RENAME TABLE old_relation_name TO new_relation_name;
-```
-### CONSTRAINTS
+
+CONSTRAINTS
+
 Constraints are used to specify rules for the data in a table. If there is any violation between the constraint and the data action, the action is aborted by the constraint. It can be specified when the table is created (using CREATE TABLE) or after it is created (using ALTER TABLE).
-### 1. NOT NULL
-When a column is defined as NOT NULL, it becomes mandatory to enter a value in that column.
-Syntax:
-```sql
+1. NOT NULL
+
+When a column is defined as NOT NULL, it becomes mandatory to enter a value in that column. Syntax:
+
 CREATE TABLE Table_Name (
   column_name data_type(size) NOT NULL
 );
-```
-### 2. UNIQUE
-Ensures that values in a column are unique.
-Syntax:
-```sql
+
+2. UNIQUE
+
+Ensures that values in a column are unique. Syntax:
+
 CREATE TABLE Table_Name (
   column_name data_type(size) UNIQUE
 );
-```
-### 3. CHECK
-Specifies a condition that each row must satisfy.
-Syntax:
-```sql
+
+3. CHECK
+
+Specifies a condition that each row must satisfy. Syntax:
+
 CREATE TABLE Table_Name (
   column_name data_type(size) CHECK (logical_expression)
 );
-```
-### 4. PRIMARY KEY
-Used to uniquely identify each record in a table.
-Properties:
-Must contain unique values.
-Cannot be null.
-Should contain minimal fields.
-Syntax:
-```sql
+
+4. PRIMARY KEY
+
+Used to uniquely identify each record in a table. Properties: Must contain unique values. Cannot be null. Should contain minimal fields. Syntax:
+
 CREATE TABLE Table_Name (
   column_name data_type(size) PRIMARY KEY
 );
-```
-### 5. FOREIGN KEY
-Used to reference the primary key of another table.
-Syntax:
-```sql
+
+5. FOREIGN KEY
+
+Used to reference the primary key of another table. Syntax:
+
 CREATE TABLE Table_Name (
   column_name data_type(size),
   FOREIGN KEY (column_name) REFERENCES other_table(column)
 );
-```
-### 6. DEFAULT
+
+6. DEFAULT
+
 Used to insert a default value into a column if no value is specified.
 
 Syntax:
-```sql
+
 CREATE TABLE Table_Name (
   col_name1 data_type,
   col_name2 data_type,
   col_name3 data_type DEFAULT 'default_value'
 );
-```
 
-**Question 1**
---
--- Paste Question 1 here
+Question 1
 
-```sql
--- Paste your SQL code below for Question 1
-```
+Create a table named Products with the following constraints: ProductID as INTEGER should be the primary key. ProductName as TEXT should be unique and not NULL. Price as REAL should be greater than 0. StockQuantity as INTEGER should be non-negative.
 
-**Output:**
+-- create table Products(
+ProductID integer primary key,
+ProductName text not null unique,
+Price real check(Price>0),
+StockQuantity integer check(StockQuantity>=0)
+);
 
-![Output1](output.png)
+Output:
 
-**Question 2**
----
--- Paste Question 2 here
+Question 2
 
-```sql
--- Paste your SQL code below for Question 2
-```
+Write a SQL Query for inserting the below values in the table Customers
 
-**Output:**
+ID NAME AGE ADDRESS SALARY
 
-![Output2](output.png)
+1 Ramesh 32 Ahmedabad 2000 2 Khilan 25 Delhi 1500 3 Kaushik 23 Kota 2000
 
-**Question 3**
----
--- Paste Question 3 here
+insert into Customers(ID,NAME,AGE,ADDRESS,SALARY)
+values(1,"Ramesh",32,"Ahmedabad",2000),(2,"Khilan",25,"Delhi",1500),(3,"Kaushik",23,"Kota",2000)
 
-```sql
--- Paste your SQL code below for Question 3
-```
+Output:
+Screenshot 2026-02-02 133135
+Question 3
 
-**Output:**
+Write a SQL Query to change the name of attribute "name" to "first_name" and add mobilenumber as number ,DOB as Date in the table Companies.
 
-![Output3](output.png)
+alter table Companies rename column name to first_name;
+alter table Companies add mobilenumber number;
+alter table Companies add column DOB Date;
 
-**Question 4**
----
--- Paste Question 4 here
+Output:
+Screenshot 2026-02-02 133156
+Question 4
 
-```sql
--- Paste your SQL code below for Question 4
-```
+Write a SQL query to Add a new column Mobilenumber as number in the Student_details table.
 
-**Output:**
+Sample table: Student_details
 
-![Output4](output.png)
+cid name type notnu dflt_value pk
 
-**Question 5**
----
--- Paste Question 5 here
+0 RollNo int 0 1 1 Name VARCHAR(100) 1 0 2 Gender TEXT 1 0 3 Subject VARCHAR(30) 0 0 4 MARKS INT (3) 0 0
 
-```sql
--- Paste your SQL code below for Question 5
-```
+alter table Student_details add column Mobilenumber number;
 
-**Output:**
+Output:
+Screenshot 2026-02-02 133226
+Question 5
 
-![Output5](output.png)
+Create a table named Customers with the following columns:
 
-**Question 6**
----
--- Paste Question 6 here
+CustomerID as INTEGER Name as TEXT Email as TEXT JoinDate as DATETIME
 
-```sql
--- Paste your SQL code below for Question 6
-```
+create table Customers(
+CustomerID INTEGER,
+Name TEXT,
+Email TEXT,
+JoinDate DATETIME);
 
-**Output:**
+Output:
+Screenshot 2026-02-02 133242
+Question 6
 
-![Output6](output.png)
+create a table named jobs including columns job_id, job_title, min_salary and max_salary, and make sure that, the default value for job_title is blank and min_salary is 8000 and max_salary is NULL will be entered automatically at the time of insertion if no value assigned for the specified columns.
 
-**Question 7**
----
--- Paste Question 7 here
+create table jobs(
+job_id,
+job_title default"",
+min_salary integer default 8000,
+max_salary integer);
 
-```sql
--- Paste your SQL code below for Question 7
-```
+Output:
+Screenshot 2026-02-02 133307
+Question 7
 
-**Output:**
+Create a table named Shipments with the following constraints: ShipmentID as INTEGER should be the primary key. ShipmentDate as DATE. SupplierID as INTEGER should be a foreign key referencing Suppliers(SupplierID). OrderID as INTEGER should be a foreign key referencing Orders(OrderID).
 
-![Output7](output.png)
+create table Shipments (
+ShipmentID integer primary key,
+ShipmentDate date,
+SupplierID integer,
+OrderID integer,
+FOREIGN KEY (SupplierID) references Suppliers(SupplierID),
+FOREIGN KEY (OrderID) references Orders(OrderID)
+);
 
-**Question 8**
----
--- Paste Question 8 here
+Output:
+Screenshot 2026-02-02 133321
+Question 8
 
-```sql
--- Paste your SQL code below for Question 8
-```
+Insert the below data into the Employee table, allowing the Department and Salary columns to take their default values.
 
-**Output:**
+EmployeeID Name Position
 
-![Output8](output.png)
+4 Emily White Analyst
 
-**Question 9**
----
--- Paste Question 9 here
+Note: The Department and Salary columns will use their default values.
 
-```sql
--- Paste your SQL code below for Question 9
-```
+insert into Employee(EmployeeID,Name,Position)
+values(4,"Emily White","Analyst");
 
-**Output:**
+Output:
+Screenshot 2026-02-02 133335
+Question 9
 
-![Output9](output.png)
+Create a table named Invoices with the following constraints: InvoiceID as INTEGER should be the primary key. InvoiceDate as DATE. Amount as REAL should be greater than 0. DueDate as DATE should be greater than the InvoiceDate. OrderID as INTEGER should be a foreign key referencing Orders(OrderID).
 
-**Question 10**
----
--- Paste Question 10 here
+create table Invoices(
+InvoiceID integer primary key,
+InvoiceDate fate,
+Amount real check(Amount>0),
+DueDate date check(DueDate>InvoiceDate),
+OrderID integer,
+foreign key (OrderID) references Orders(OrderID));
 
-```sql
--- Paste your SQL code below for Question 10
-```
+Output:
+Screenshot 2026-02-02 133352
+Question 10
 
-**Output:**
+Insert all books from Out_of_print_books into Books
 
-![Output10](output.png)
+Table attributes are ISBN, Title, Author, Publisher, YearPublished
 
+insert into Books select * from Out_of_print_books
 
-## RESULT
+Output:
+Screenshot 2026-02-02 133405
+RESULT
+
 Thus, the SQL queries to implement different types of constraints and DDL commands have been executed successfully.
