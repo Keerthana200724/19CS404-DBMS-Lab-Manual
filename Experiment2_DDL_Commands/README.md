@@ -1,236 +1,252 @@
-Experiment 2: DDL Commands
-AIM
+# Experiment 2: DDL Commands
 
+## AIM
 To study and implement DDL commands and different types of constraints.
-THEORY
-1. CREATE
 
+## THEORY
+
+### 1. CREATE
 Used to create a new relation (table).
 
-Syntax:
-
+**Syntax:**
+```sql
 CREATE TABLE (
   field_1 data_type(size),
   field_2 data_type(size),
   ...
 );
-
-2. ALTER
-
-Used to add, modify, drop, or rename fields in an existing relation. (a) ADD
-
+```
+### 2. ALTER
+Used to add, modify, drop, or rename fields in an existing relation.
+(a) ADD
+```sql
 ALTER TABLE std ADD (Address CHAR(10));
-
+```
 (b) MODIFY
-
+```sql
 ALTER TABLE relation_name MODIFY (field_1 new_data_type(size));
-
+```
 (c) DROP
-
+```sql
 ALTER TABLE relation_name DROP COLUMN field_name;
-
+```
 (d) RENAME
-
+```sql
 ALTER TABLE relation_name RENAME COLUMN old_field_name TO new_field_name;
-
-3. DROP TABLE
-
+```
+### 3. DROP TABLE
 Used to permanently delete the structure and data of a table.
-
+```sql
 DROP TABLE relation_name;
-
-4. RENAME
-
+```
+### 4. RENAME
 Used to rename an existing database object.
-
+```sql
 RENAME TABLE old_relation_name TO new_relation_name;
-
-CONSTRAINTS
-
+```
+### CONSTRAINTS
 Constraints are used to specify rules for the data in a table. If there is any violation between the constraint and the data action, the action is aborted by the constraint. It can be specified when the table is created (using CREATE TABLE) or after it is created (using ALTER TABLE).
-1. NOT NULL
-
-When a column is defined as NOT NULL, it becomes mandatory to enter a value in that column. Syntax:
-
+### 1. NOT NULL
+When a column is defined as NOT NULL, it becomes mandatory to enter a value in that column.
+Syntax:
+```sql
 CREATE TABLE Table_Name (
   column_name data_type(size) NOT NULL
 );
-
-2. UNIQUE
-
-Ensures that values in a column are unique. Syntax:
-
+```
+### 2. UNIQUE
+Ensures that values in a column are unique.
+Syntax:
+```sql
 CREATE TABLE Table_Name (
   column_name data_type(size) UNIQUE
 );
-
-3. CHECK
-
-Specifies a condition that each row must satisfy. Syntax:
-
+```
+### 3. CHECK
+Specifies a condition that each row must satisfy.
+Syntax:
+```sql
 CREATE TABLE Table_Name (
   column_name data_type(size) CHECK (logical_expression)
 );
-
-4. PRIMARY KEY
-
-Used to uniquely identify each record in a table. Properties: Must contain unique values. Cannot be null. Should contain minimal fields. Syntax:
-
+```
+### 4. PRIMARY KEY
+Used to uniquely identify each record in a table.
+Properties:
+Must contain unique values.
+Cannot be null.
+Should contain minimal fields.
+Syntax:
+```sql
 CREATE TABLE Table_Name (
   column_name data_type(size) PRIMARY KEY
 );
-
-5. FOREIGN KEY
-
-Used to reference the primary key of another table. Syntax:
-
+```
+### 5. FOREIGN KEY
+Used to reference the primary key of another table.
+Syntax:
+```sql
 CREATE TABLE Table_Name (
   column_name data_type(size),
   FOREIGN KEY (column_name) REFERENCES other_table(column)
 );
-
-6. DEFAULT
-
+```
+### 6. DEFAULT
 Used to insert a default value into a column if no value is specified.
 
 Syntax:
-
+```sql
 CREATE TABLE Table_Name (
   col_name1 data_type,
   col_name2 data_type,
   col_name3 data_type DEFAULT 'default_value'
 );
+```
 
-Question 1
-
-Create a table named Products with the following constraints: ProductID as INTEGER should be the primary key. ProductName as TEXT should be unique and not NULL. Price as REAL should be greater than 0. StockQuantity as INTEGER should be non-negative.
-
--- create table Products(
-ProductID integer primary key,
-ProductName text not null unique,
-Price real check(Price>0),
-StockQuantity integer check(StockQuantity>=0)
+**Question 1**
+```
+CREATE TABLE STUDENT (
+    STUDENT_ID NUMBER(5),
+    NAME VARCHAR2(30),
+    DEPARTMENT VARCHAR2(20),
+    MARKS NUMBER(3)
 );
 
-Output:
+DESC STUDENT;
+```
+**Output:**
+<img width="973" height="227" alt="image" src="https://github.com/user-attachments/assets/8d5b7209-957a-4a61-8e18-18f8e358f009" />
 
-Question 2
+**Question 2**
+```
+ALTER TABLE STUDENT
+ADD (ADDRESS VARCHAR2(30));
 
-Write a SQL Query for inserting the below values in the table Customers
+DESC STUDENT;
+```
 
-ID NAME AGE ADDRESS SALARY
+**Output:**
+<img width="957" height="371" alt="image" src="https://github.com/user-attachments/assets/23e6c2ea-4042-4e9b-9c93-a1cad3c67831" />
 
-1 Ramesh 32 Ahmedabad 2000 2 Khilan 25 Delhi 1500 3 Kaushik 23 Kota 2000
+**Question 3**
+```
+ALTER TABLE STUDENT
+MODIFY (NAME VARCHAR2(50));
 
-insert into Customers(ID,NAME,AGE,ADDRESS,SALARY)
-values(1,"Ramesh",32,"Ahmedabad",2000),(2,"Khilan",25,"Delhi",1500),(3,"Kaushik",23,"Kota",2000)
+DESC STUDENT;
+```
+**Output:**
+<img width="987" height="235" alt="image" src="https://github.com/user-attachments/assets/46a5c57b-eae2-4685-abb0-04524f764cb2" />
 
-Output:
-Screenshot 2026-02-02 133135
-Question 3
+**Question 4**
+```
+ALTER TABLE STUDENT
+DROP COLUMN ADDRESS;
 
-Write a SQL Query to change the name of attribute "name" to "first_name" and add mobilenumber as number ,DOB as Date in the table Companies.
+DESC STUDENT;
+```
 
-alter table Companies rename column name to first_name;
-alter table Companies add mobilenumber number;
-alter table Companies add column DOB Date;
+**Output:**
+<img width="990" height="378" alt="image" src="https://github.com/user-attachments/assets/94e8a159-1a2c-47fc-8466-254e167c6e22" />
 
-Output:
-Screenshot 2026-02-02 133156
-Question 4
+**Question 5**
+```
+ALTER TABLE STUDENT
+RENAME COLUMN NAME TO STUDENT_NAME;
 
-Write a SQL query to Add a new column Mobilenumber as number in the Student_details table.
+DESC STUDENT;
+```
 
-Sample table: Student_details
+**Output:**
+<img width="960" height="205" alt="image" src="https://github.com/user-attachments/assets/d7403efd-37a1-4f69-8a4a-c464e346fb47" />
 
-cid name type notnu dflt_value pk
-
-0 RollNo int 0 1 1 Name VARCHAR(100) 1 0 2 Gender TEXT 1 0 3 Subject VARCHAR(30) 0 0 4 MARKS INT (3) 0 0
-
-alter table Student_details add column Mobilenumber number;
-
-Output:
-Screenshot 2026-02-02 133226
-Question 5
-
-Create a table named Customers with the following columns:
-
-CustomerID as INTEGER Name as TEXT Email as TEXT JoinDate as DATETIME
-
-create table Customers(
-CustomerID INTEGER,
-Name TEXT,
-Email TEXT,
-JoinDate DATETIME);
-
-Output:
-Screenshot 2026-02-02 133242
-Question 6
-
-create a table named jobs including columns job_id, job_title, min_salary and max_salary, and make sure that, the default value for job_title is blank and min_salary is 8000 and max_salary is NULL will be entered automatically at the time of insertion if no value assigned for the specified columns.
-
-create table jobs(
-job_id,
-job_title default"",
-min_salary integer default 8000,
-max_salary integer);
-
-Output:
-Screenshot 2026-02-02 133307
-Question 7
-
-Create a table named Shipments with the following constraints: ShipmentID as INTEGER should be the primary key. ShipmentDate as DATE. SupplierID as INTEGER should be a foreign key referencing Suppliers(SupplierID). OrderID as INTEGER should be a foreign key referencing Orders(OrderID).
-
-create table Shipments (
-ShipmentID integer primary key,
-ShipmentDate date,
-SupplierID integer,
-OrderID integer,
-FOREIGN KEY (SupplierID) references Suppliers(SupplierID),
-FOREIGN KEY (OrderID) references Orders(OrderID)
+**Question 6**
+```
+CREATE TABLE EMPLOYEE (
+    EMP_ID NUMBER(5) PRIMARY KEY,
+    EMP_NAME VARCHAR2(30) NOT NULL,
+    SALARY NUMBER(8,2)
 );
 
-Output:
-Screenshot 2026-02-02 133321
-Question 8
+DESC EMPLOYEE;
+```
 
-Insert the below data into the Employee table, allowing the Department and Salary columns to take their default values.
+**Output:**
+<img width="972" height="377" alt="image" src="https://github.com/user-attachments/assets/15ed40b5-588f-4fc6-b743-93e768f73d2d" />
 
-EmployeeID Name Position
+**Question 7**
+```
+CREATE TABLE COURSE (
+    COURSE_ID NUMBER(5) PRIMARY KEY,
+    COURSE_NAME VARCHAR2(30) UNIQUE,
+    DURATION NUMBER(2) CHECK (DURATION > 0)
+);
 
-4 Emily White Analyst
+DESC COURSE;
+INSERT INTO COURSE VALUES (101, 'Python', 6);
+INSERT INTO COURSE VALUES (102, 'Java', 4);
 
-Note: The Department and Salary columns will use their default values.
+SELECT * FROM COURSE;
+```
 
-insert into Employee(EmployeeID,Name,Position)
-values(4,"Emily White","Analyst");
+**Output:**
+<img width="992" height="352" alt="image" src="https://github.com/user-attachments/assets/e5c950e4-7582-4f7c-863c-ffcad34c88ac" />
 
-Output:
-Screenshot 2026-02-02 133335
-Question 9
 
-Create a table named Invoices with the following constraints: InvoiceID as INTEGER should be the primary key. InvoiceDate as DATE. Amount as REAL should be greater than 0. DueDate as DATE should be greater than the InvoiceDate. OrderID as INTEGER should be a foreign key referencing Orders(OrderID).
+**Question 8**
+```
+CREATE TABLE DEPARTMENT (
+    DEPT_ID NUMBER(3) PRIMARY KEY,
+    DEPT_NAME VARCHAR2(30)
+);
 
-create table Invoices(
-InvoiceID integer primary key,
-InvoiceDate fate,
-Amount real check(Amount>0),
-DueDate date check(DueDate>InvoiceDate),
-OrderID integer,
-foreign key (OrderID) references Orders(OrderID));
+CREATE TABLE STUDENT_DEPT (
+    STUDENT_ID NUMBER(5) PRIMARY KEY,
+    STUDENT_NAME VARCHAR2(30),
+    DEPT_ID NUMBER(3),
+    FOREIGN KEY (DEPT_ID) REFERENCES DEPARTMENT(DEPT_ID)
+);
 
-Output:
-Screenshot 2026-02-02 133352
-Question 10
+DESC STUDENT_DEPT;
+```
 
-Insert all books from Out_of_print_books into Books
+**Output:**
+<img width="932" height="392" alt="image" src="https://github.com/user-attachments/assets/dee7670f-d1bc-4f71-8a4f-b623e2f9493f" />
 
-Table attributes are ISBN, Title, Author, Publisher, YearPublished
+**Question 9**
+```
+CREATE TABLE CUSTOMER (
+    CUSTOMER_ID NUMBER(5) PRIMARY KEY,
+    CUSTOMER_NAME VARCHAR2(30) NOT NULL,
+    CITY VARCHAR2(20) DEFAULT 'Chennai'
+);
 
-insert into Books select * from Out_of_print_books
+INSERT INTO CUSTOMER (CUSTOMER_ID, CUSTOMER_NAME)
+VALUES (101, 'Ravi');
 
-Output:
-Screenshot 2026-02-02 133405
-RESULT
+SELECT * FROM CUSTOMER;
+```
 
+**Output:**
+<img width="992" height="417" alt="image" src="https://github.com/user-attachments/assets/85f267e3-3043-47b4-99c7-ba699d6cf08a" />
+
+**Question 10**
+```
+CREATE TABLE TEMP_STUDENT (
+    ID NUMBER(5),
+    NAME VARCHAR2(30)
+);
+
+RENAME TEMP_STUDENT TO STUDENT_DETAILS;
+
+DESC STUDENT_DETAILS;
+
+DROP TABLE STUDENT_DETAILS;
+```
+
+**Output:**
+
+<img width="962" height="392" alt="image" src="https://github.com/user-attachments/assets/acd6528f-8bc8-4937-b1cb-964e194881d9" />
+
+## RESULT
 Thus, the SQL queries to implement different types of constraints and DDL commands have been executed successfully.
